@@ -13,6 +13,7 @@
     "express-sanitized": "^0.5.1",
     "express-validator": "^2.20.10",
     "forever": "^0.15.2",
+    "helmet": "^2.3.0",
     "jsonwebtoken": "^7.1.9",
     "lodash": "^4.16.4",
     "mongoose": "^4.6.3",
