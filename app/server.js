@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var express   = require('express'),
     path      = require('path'),
     bodyParser= require('body-parser'),
@@ -7,7 +9,6 @@ var express   = require('express'),
     socket    = require('./socket'),
     config    = require('./config');
 var app       = express();
-
 
 /**
  *  Initialize Application

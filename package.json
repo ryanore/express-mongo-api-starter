@@ -7,6 +7,7 @@
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
+    "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "express-jwt": "^5.1.0",
     "express-sanitized": "^0.5.1",
@@ -20,9 +21,11 @@
     "socket.io": "^1.5.0"
   },
   "scripts": {
-    "start": "npm run server:dev",
-    "server:dev": "source development.env; forever start app/server",
-    "server:prod": "source env/production.env; forever start app/server"
+    "start": "npm run dev",
+    "test": "echo 'no test suite yet'",
+    "dev": "node app/server.js",
+    "prod": "forever start app/server.js",
+    "stop": "forever stop app/server.js"
   },
   "engines": {
     "node": "~6.0.0"
