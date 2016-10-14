@@ -14,7 +14,7 @@ var generateAndSendToken = function(usr, req, res){
 		access: usr.access,
 		_id: usr._id
 	};
-	var token = jwt.sign(user, config.secret, { expiresInMinutes: config.token_expire_minutes });
+  var token = jwt.sign(user, config.secret, { expiresIn: config.expiry_minutes });
 
 	var session = new Session({
 		access_token: token
@@ -41,7 +41,7 @@ module.exports = {
       }
 
       usr.comparePassword(req.body.password, function(err, isMatch) {
-        if (err){ 
+        if (err){
           throw err;
         }
         if(!isMatch){
@@ -51,11 +51,11 @@ module.exports = {
         generateAndSendToken(usr, req, res);
       });
     });
-  },  
+  },
 
 
   /**
-   *  Verify Token, 
+   *  Verify Token,
    *  Split Bearer Token and verify content of the header
    *  Verify user is in db
    *  Pass basic user info along
@@ -67,21 +67,21 @@ module.exports = {
     if (parts.length == 2) {
       var scheme = parts[0];
       var credentials = parts[1];
-      
+
       if (/^Bearer$/i.test(scheme)) {
         token = credentials;
         jwt.verify(token, config.secret, function(err, decoded){
           if(err){
             return res.status(401).send(err);
-          } 
+          }
           else{
             User.findOne({username: decoded.username}, function(err,usr){
               generateAndSendToken(usr, req, res);
             });
           }
         });
-      } 
-    } 
+      }
+    }
     else{
       console.log("No Valid authorization header...(Bearer) while verifying access_token");
       return res.status(401).send(err);
