@@ -11,6 +11,7 @@
     "express-jwt": "^5.1.0",
     "express-sanitized": "^0.5.1",
     "express-validator": "^2.20.10",
+    "forever": "^0.15.2",
     "jsonwebtoken": "^7.1.9",
     "lodash": "^4.16.4",
     "mongoose": "^4.6.3",
@@ -20,8 +21,8 @@
   },
   "scripts": {
     "start": "npm run server:dev",
-    "server:dev": "source development.env; node app/server",
-    "server:prod": "source env/production.env; node app/server"
+    "server:dev": "source development.env; forever start app/server",
+    "server:prod": "source env/production.env; forever start app/server"
   },
   "engines": {
     "node": "~6.0.0"
