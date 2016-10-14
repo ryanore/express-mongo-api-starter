@@ -2,13 +2,12 @@ var express   = require('express'),
     path      = require('path'),
     bodyParser= require('body-parser'),
     mongoose  = require('mongoose'),
+    helmet = require('helmet'),
     sanitize 	= require('express-sanitized'),
     socket    = require('./socket'),
     config    = require('./config');
-
 var app       = express();
 
-console.log('SERVER:::::::::::', process.env.NODE_ENV);
 
 /**
  *  Initialize Application
@@ -18,6 +17,7 @@ console.log('SERVER:::::::::::', process.env.NODE_ENV);
  */
 var initApplication = function initApplication(){
 	var routes, server;
+  app.use(helmet())
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
   app.use(sanitize()); // this line follows express.bodyParser()
