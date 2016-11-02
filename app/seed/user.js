@@ -1,30 +1,50 @@
 var User = require('../models/userModel').model;
 
 module.exports = function(){
-  
+
   User.findOne(function(err,usr){
-    
+
     if( !usr ){
-      
-      // Create a super admin.  It's up to you to delete this user later
-      
-      var admin = new User({
-        'username':'firstAdmin',
-        'firstName':'Admin',
+
+      const users = [{
+        'username':'adminuser1',
+        'firstName':'John',
         'lastName':'Admin',
-        'email':'admin@example.com',
-        'role':'admin',
-        'password': 'iamanadmin',
-        'access': 1
-      });
-      
-      admin.save(function(err){
-        if(!err){
-          console.log('User Created:: ');
-          console.log(usr);
-        }  
-      });
-      
+        'email':'developertestbed@gmail.com',
+        'role2': ['admin'],
+        'password': '123456'
+      }, {
+        'username':'employee1',
+        'firstName':'John',
+        'lastName':'Employee',
+        'email':'developertestbed@gmail.com',
+        'roles': ['employee'],
+        'password': '123456'
+      }, {
+        'username':'customer1',
+        'firstName':'John',
+        'lastName':'Customer',
+        'email':'developertestbed@gmail.com',
+        'roles': ['customer'],
+        'password': '123456'
+      }, {
+        'username':'broker1',
+        'firstName':'John',
+        'lastName':'Broker',
+        'email':'developertestbed@gmail.com',
+        'roles': ['broker'],
+        'password': '123456'
+      }];
+
+
+      for( u in users ) {
+        let user = new User(users[u]);
+        user.save((err, doc) => {
+          if(!err){
+            console.log('CREATING USER:  ', doc);
+          }
+        });
+      }
     }
   });
 };

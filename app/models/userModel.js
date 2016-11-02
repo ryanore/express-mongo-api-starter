@@ -12,6 +12,7 @@ var validateEmail = function(email) {
 var UserSchema = new Schema({
   firstName: String,
   lastName: String,
+  roles: Array,
   access: {
     type: Number,
     default: 0
