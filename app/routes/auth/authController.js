@@ -8,12 +8,10 @@ var Session = require('../../models/sessionModel').model;
  *	Create Signed Token
  *	Store Token in Mongodb with self-destruct expire
  */
-var generateAndSendToken = function(usr, req, res){
-	var user = {
-		username: usr.username,
-		access: usr.access,
-		_id: usr._id
-	};
+var generateAndSendToken = function(doc, req, res){
+``
+  const user = Object.assign({}, doc._doc);
+  delete user.password;
   var token = jwt.sign(user, config.secret, { expiresIn: config.expiry_minutes });
 
 	var session = new Session({
